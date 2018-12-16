@@ -1,9 +1,9 @@
 #!/bin/sh
 
 CURATOR_INDEX_PATTERN="metricbeat|filebeat"
-CURATOR_INDEX_AGE=${1:-10}
-CURATOR_INDEX_DISKSPACE=${2:-400}
-CURATOR_COMMAND=${3:-show_indices}
+CURATOR_INDEX_AGE=${1:-100}
+CURATOR_INDEX_DISKSPACE=${2:-50}
+CURATOR_COMMAND=${3:-show_indices --verbose --header}
 
 CURATOR_AGE_FILTER=$(cat <<EOF
                      {
@@ -35,5 +35,5 @@ CURATOR_SPACE_FILTER=$(cat <<EOF
 EOF
 )
 
-curator_cli ${CURATOR_COMMAND} --verbose --header --filter_list "[${CURATOR_AGE_FILTER}]"
-curator_cli ${CURATOR_COMMAND} --verbose --header --filter_list "[${CURATOR_SPACE_FILTER}]"
+curator_cli ${CURATOR_COMMAND} --filter_list "[${CURATOR_AGE_FILTER}]"
+curator_cli ${CURATOR_COMMAND} --filter_list "[${CURATOR_SPACE_FILTER}]"
