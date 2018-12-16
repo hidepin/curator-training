@@ -1,6 +1,7 @@
 #!/bin/sh
 
 CURATOR_INDEX_PATTERN="metricbeat|filebeat"
+CURATOR_INDEX_AGE=${1:-10}
 CURATOR_FILTER=$(cat <<EOF
                      {
                         "filtertype": "pattern",
@@ -12,7 +13,7 @@ CURATOR_FILTER=$(cat <<EOF
                         "source": "creation_date",
                         "direction": "older",
                         "unit": "days",
-                        "unit_count": 10
+                        "unit_count": ${CURATOR_INDEX_AGE}
                      }
 EOF
 )
