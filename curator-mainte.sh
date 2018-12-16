@@ -3,7 +3,7 @@
 CURATOR_INDEX_PATTERN="metricbeat|filebeat"
 CURATOR_INDEX_AGE=${1:-100}
 CURATOR_INDEX_DISKSPACE=${2:-50}
-CURATOR_COMMAND=${3:-show_indices --verbose --header}
+CURATOR_COMMAND=${3:-delete_indices --ignore_empty_list}
 
 CURATOR_AGE_FILTER=$(cat <<EOF
                      {
